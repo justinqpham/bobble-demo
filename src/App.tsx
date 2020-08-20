@@ -113,6 +113,7 @@ class App extends React.Component<Props, State> {
     this.setState({ usercount: state.userCount, attendance: state.watcherCount });
     // Forward the message
     this.remoteMoods_=state.moods;
+    // console.log(this.remoteMoods_);
   };
 
   private gainNode_: GainNode;
@@ -144,7 +145,10 @@ class App extends React.Component<Props, State> {
         // Begins receiving state from the server.
         // Passes that state regularly to `onRecv_`.
         setInterval(() => {
+          // let v = this.localMoods_.getMoods(this.remoteMoods_);
+          // console.log(v);
           this.engineCb_(this.localMoods_.getMoods(this.remoteMoods_));
+          // this.engineCb_(v);
         },100)
 
         this.gainNode_ = this.context_.createGain();
