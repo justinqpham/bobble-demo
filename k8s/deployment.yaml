@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boo-the-astros-client-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: boo-the-astros
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: boo-the-astros
+    spec:
+      containers:
+        - image: gcr.io/crowdcheer/boo-the-astros:0.2.6
+          imagePullPolicy: Always
+          name: boo-the-astros
+          ports:
+          - containerPort: 8000
+          resources:
+            limits:
+              memory: "1200Mi"
+              cpu: "1200m"
+            requests:
+              memory: "1200Mi"
+              cpu: "1200m"

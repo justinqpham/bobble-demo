@@ -1,0 +1,65 @@
+{
+  "dimensions": [{
+    "name": "Booing",
+    "gain": -6,
+    "loops": [{
+      "peak": 1.0,
+      "files": "audio/Booing/Loops/High/*.wav"
+    }],
+    "oneshots": [{
+      "threshold": 0.5,
+      "gain": 5,
+      "mode": "RisingEdge",
+      "files": "audio/Booing/Transitions/*.wav"
+    }]
+  }, {
+    "name": "Cheering",
+    "gain": -6,
+    "loops": [{
+      "peak": 1.0,
+      "files": "audio/Cheering/Loops/High/*.wav"
+    }],
+    "oneshots": [{
+      "threshold": 0.375,
+      "mode": "RisingEdge",
+      "files": "audio/Cheering/Transitions/*.wav"
+    }]
+  }, {
+    "name": "Clapping",
+    "gain": -7,
+    "loops": [{
+      "peak": 1.0,
+      "files": "audio/Clapping/Loops/High/*.wav"
+    }],
+    "oneshots": [{
+      "threshold": 0.375,
+      "mode": "RisingEdge",
+      "files": "audio/Clapping/Transitions/*.wav"
+    }]
+  }, {
+    "name": "LetDown",
+    "gain": -7,
+    "loops": [],
+    "oneshots": [{
+      "threshold": 0.375,
+      "mode": "RisingEdge",
+      "files": "audio/LetDown/Transitions/*.wav"
+    }]
+  }, {
+    "name": "BuildUp",
+    "gain": -14,
+    "loops": [{
+      "peak": 1.0,
+      "files": "audio/BuildUp/Loops/High/*.wav"
+    }],
+    "oneshots": []
+  }, {
+    "name": "Neutral",
+    "gain": -12,
+    "loops": [{
+      "peak": 1.0,
+      "files": "audio/Neutral/Loops/High/*.wav"
+    }],
+    "oneshots": []
+  }]
+}
