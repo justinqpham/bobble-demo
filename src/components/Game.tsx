@@ -10,12 +10,11 @@ import Team from './Team';
 import BoardButton from './BoardButton';
 
 const Game = (props) => {
-    const [display, setDisplay] = useState("block");
+    const [display, setDisplay] = useState("inline-block");
     const [menu, setMenu] = useState(false);
     const [sound, setSound] = useState([false,{backgroundColor:"transparent"}]);
     const [share, setShare] = useState([false,{backgroundColor:"transparent"}]);
     const [legal, setLegal] = useState([false,{backgroundColor:"transparent"}]);
-    const [disclaimer, setDisclaimer] = useState(false);
     const [pp, setPP] = useState(false);
     const [tos, setToS] = useState(false);
     const menuimg = useRef("/static/assets/settings.png");
@@ -83,18 +82,16 @@ const Game = (props) => {
         <div id="clean" style={{display:display}}>
             <div id="backleft"></div>
             <div id="backright"></div>
-
-            <div id="teams"><Team select={teamSelect} team="away-team" show={team[0]}><h1>A</h1></Team><Team select={teamSelect} team="home-team" show={team[1]}><h1>H</h1></Team></div>
-
+            <div id="teams"><Team select={teamSelect} team="away-team" show={team[0]}><h1>A</h1></Team><Team select={teamSelect} team="home-team" show={team[1]}><h1>B</h1></Team></div>
             <div id="brd">
-                <BoardButton mood={props.mood} click={props.emote} cmd={"Cheering"} team={team}><p>Cheer</p></BoardButton>
-                <BoardButton mood={props.mood} click={props.emote} cmd={"BuildUp"} team={team}><p>Let's Go</p></BoardButton>
-                <BoardButton mood={props.mood} click={props.emote} cmd={"Clapping"} team={team}><p>Clap</p></BoardButton>
-                <BoardButton mood={props.mood} click={props.emote} cmd={"LetDown"} team={team}><p>Let Down</p></BoardButton>
-                <BoardButton mood={props.mood} click={props.emote} cmd={"Booing"} team={team}><p>Boo</p></BoardButton>
+                <BoardButton mood={props.mood} click={props.emote} cmd={"Cheering"} team={team}><img src="/static/assets/cheering.png" alt=""/></BoardButton>
+                <BoardButton mood={props.mood} click={props.emote} cmd={"BuildUp"} team={team}><img src="/static/assets/buildup.png" alt=""/></BoardButton>
+                <BoardButton mood={props.mood} click={props.emote} cmd={"Clapping"} team={team}><img src="/static/assets/clapping.png" alt=""/></BoardButton>
+                <BoardButton mood={props.mood} click={props.emote} cmd={"LetDown"} team={team}><img src="/static/assets/letdown.png" alt=""/></BoardButton>
+                <BoardButton mood={props.mood} click={props.emote} cmd={"Booing"} team={team}><img src="/static/assets/booing.png" alt=""/></BoardButton>
             </div>
-            
             <HomeBtn show={props.state.game} back={props.back}/>
+            <div id="game-logo"><a href="http://www.bobblesports.com" target="_blank"><img src="/static/logo512.png"/></a></div>
             <Modal propid="menu" show={menu}>
                 <div id="menubtns">
                     <button className="tabbtns" style={sound[1]} onClick={()=>handleOpts("sound")}><img src="/static/assets/sound.png" alt=""/></button>
@@ -103,7 +100,7 @@ const Game = (props) => {
                 </div>
             </Modal>
             <Modal propid="legal" show={legal[0]}>
-                <div id="legaldiv"><p><span><p onClick={()=>{setDisclaimer(true);window.scrollTo(0, 0);}}>Disclaimer</p></span> | <span><p onClick={() =>{setPP(true);window.scrollTo(0, 0);}}>Privacy Policy</p></span> | <span><p onClick={() =>{setToS(true);window.scrollTo(0, 0);}}>Terms of Service</p></span></p></div>
+                <div id="legaldiv"><p><span><p onClick={() =>{setPP(true);window.scrollTo(0, 0);}}>Privacy Policy</p></span> | <span><p onClick={() =>{setToS(true);window.scrollTo(0, 0);}}>Terms of Service</p></span></p></div>
             </Modal>
             <Modal propid="share"  show={share[0]}>
                 <div id="share-buttons">
@@ -139,7 +136,6 @@ const Game = (props) => {
                 </div>
             </Modal>
             <MenuBtn menu={handleMenu} menuimg={menuimg.current}/>
-            <Modal propid={"fullscreen"} show={disclaimer}><div className="closeModal"></div><button className="closeButton" onClick={()=>setDisclaimer(false)}><img src="/static/assets/chevron.png"/></button><Disclaimer/></Modal>
             <Modal propid={"fullscreen"} show={pp}><div className="closeModal"></div><button className="closeButton" onClick={()=>setPP(false)}><img src="/static/assets/chevron.png"/></button><PrivacyPolicy/></Modal>
             <Modal propid={"fullscreen"} show={tos}><div className="closeModal"></div><button className="closeButton" onClick={()=>setToS(false)}><img src="/static/assets/chevron.png"/></button><TermsofService/></Modal>
         </div>

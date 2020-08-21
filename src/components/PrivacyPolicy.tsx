@@ -4,8 +4,8 @@ const PrivacyPolicy = (props) => {
     return (
         <div className="legal">
             <h1>Bobble Sports Privacy Policy</h1>
-            <p>Last updated on August 9, 2020</p>
-            <p>This Bobble Sports Privacy Policy (the “Privacy Policy”) applies to the Website Bobble Sports.com, referred to as Bobble Sports (“Boo The Stros,” “we,” “us” or “our”) as listed below. If you have any questions or concerns regarding this Privacy Policy, please contact us first at <span style={{textDecoration: "underline"}}>privacy@Bobble Sports.com</span>.</p>
+            <p>Last updated on August 20, 2020</p>
+            <p>This Bobble Sports Privacy Policy (the “Privacy Policy”) applies to the Website Bobble Sports.com, referred to as Bobble Sports ("Bobble", “we,” “us” or “our”) as listed below. If you have any questions or concerns regarding this Privacy Policy, please contact us first at <span style={{textDecoration: "underline"}}>privacy@bobblesports.com</span>.</p>
             <p>You agree to this Privacy Policy, in its entirety, when you: (a) access the Site or use it’s Services. <span style={{fontWeight: "800"}}>IF YOU DO NOT AGREE TO THIS PRIVACY POLICY IN ITS ENTIRETY, YOU SHOULD NOT ACCESS OR OTHERWISE USE THE SITE OR SERVICES.</span></p>
             <h2>What Personal Data Do We Collect?</h2>
             <p>We collect certain Personal Information from our users.  “Personal Information” means information or a set of information that identifies or could reasonably be ascribed to or be used by or on behalf of us to identify an individual or household. Personal Information does not include information that is encoded, anonymous, aggregated or publicly available information that has not been combined with non-public Personal Information.</p>
@@ -37,7 +37,7 @@ const PrivacyPolicy = (props) => {
             <h3>California Do-Not-Track Disclosure</h3>
             <p>Bobble Sports is committed to providing you with meaningful choices about the information collected on our Platform for third party purposes. Bobble Sports does not currently recognize or respond to browser-initiated Do-Not-Track signals, as the industry is currently still working on Do-Not-Track standards, implementations, and solutions.</p>
             <h2>Questions?</h2>
-            <p>If you have any questions, please feel free to contact us at <span style={{textDecoration:"underline"}}>privacy@Bobble Sports.com</span></p>
+            <p>If you have any questions, please feel free to contact us at <span style={{textDecoration:"underline"}}>privacy@bobblesports.com</span></p>
         </div>
     );
 };

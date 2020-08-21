@@ -4,8 +4,8 @@ const TermsofService = (props) => {
     return (
         <div className="legal">
             <h1>Bobble Sports Terms of Service</h1>
-            <p>Last updated on August 9, 2020</p>
-            <p>This Bobble Sports Terms of Service (the “TOS”) applies to the Website Bobble Sports.com, referred to as Bobble Sports (“Boo The Stros,” “we,” “us” or “our”) as listed below. If you have any questions or concerns regarding this TOS, please contact us first at <span style={{textDecoration:"underline"}}>privacy@Bobble Sports.com</span>.</p>  
+            <p>Last updated on August 20, 2020</p>
+            <p>This Bobble Sports Terms of Service (the “TOS”) applies to the Website Bobble Sports.com, referred to as Bobble Sports ("Bobble", “we,” “us” or “our”) as listed below. If you have any questions or concerns regarding this TOS, please contact us first at <span style={{textDecoration:"underline"}}>privacy@bobblesports.com</span>.</p>  
             <p>You agree to the TOS, in its entirety, when you: (a) access the Site or use it’s Services. <span style={{fontWeight: "800"}}>IF YOU DO NOT AGREE TO THIS TOS IN ITS ENTIRETY, YOU SHOULD NOT ACCESS OR OTHERWISE USE THE SITE OR SERVICES</span>.</p>
             <h2>Changes</h2>
             <p style={{fontWeight:"800"}}>Please read this page carefully. Bobble Sports may revise these TOS at any time, without prior notice, by updating this posting. You should visit this page periodically to review the TOS, because THEY ARE BINDING on you.</p>
@@ -38,7 +38,7 @@ const TermsofService = (props) => {
             <h2>Export Control</h2>
             <p>The United States controls the export of products and information. You agree to comply with such restrictions and not to export or re-export the Materials (including Software) to countries or persons prohibited under the export control laws. By downloading the Materials (including Software), you are agreeing that you are not in a country where such export is prohibited or are a person or entity to which such export is prohibited. You are responsible for compliance with the laws of your local jurisdiction regarding the import, export, or re-export of the Product.</p>
             <h2>User Information</h2>
-            <p>Our Privacy Policy at www.Bobble Sports.com/privacy explains how we use any information about you that we receive from you or collect when you use Bobble Sports.</p>
+            <p>Our Privacy Policy at www.BobbleSports.com/privacy explains how we use any information about you that we receive from you or collect when you use Bobble Sports.</p>
             <h2>General</h2>
             <p>This Website is hosted on a web server in the continental USA. Bobble Sports makes no claims the Materials are appropriate or may be downloaded outside of the United States. Access to the Materials (including Software) may not be legal by certain persons or in certain countries. If you access the Website from outside of the United States, you do so at YOUR OWN RISK and are responsible for compliance with the laws of your jurisdiction. This Agreement is governed by the internal substantive laws of the State of California, without respect to its conflict of laws principles.</p>
             <p>If the need arises, we may suspend access to Bobble Sports to carry out routine or emergency work. We will not be responsible if for any reason Bobble Sports is unavailable.</p>

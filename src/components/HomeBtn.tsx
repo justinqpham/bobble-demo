@@ -8,7 +8,7 @@ const HomeBtn = (props) => {
     },[props.show])
   
     return (
-        <button id="burger" onClick={props.back} style={{left:"15px",display:display}}><img src="/static/assets/home.png"/></button>
+        <button id="burger" onClick={props.back} style={{left:"15px",display:display}}><img src="/static/assets/chevron.png"/></button>
     );
 };
 

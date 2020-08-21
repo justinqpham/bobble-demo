@@ -5,10 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 0;
 }
 html, body, #root{
   height: 100%;
   width: 100%;
+  touch-action: manipulation;
+  font-size: 0;
 }
 
 code {

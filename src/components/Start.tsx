@@ -11,7 +11,6 @@ const AudioContext = window.AudioContext // Default
 
 const Start = (props) => {
     const [display, setDisplay] = useState("block");
-    const [disclaimer, setDisclaimer] = useState(false);
     const [pp, setPP] = useState(false);
     const [tos, setToS] = useState(false);
 
@@ -37,10 +36,9 @@ const Start = (props) => {
             <div id="startlogo">
                 <img src="/static/logo.png" />
             </div>
-            <div id="soundon"><p>Your button presses will be combined with reactions from other fans to create a collective crowd audio stream delivered to your device.<br/><br/><span style={{fontWeight: 800}}>Tap buttons faster for a more intense reaction!</span></p></div>
+            <div id="soundon"><p><span style={{fontWeight:"800"}}>Turn sound on!</span><br/><br/>Your button presses will be combined with reactions from other fans to create a collective crowd audio stream delivered to your device.<br/><br/><span style={{fontWeight: 800}}>Tap buttons faster for a more intense reaction!</span></p></div>
             <button onClick={handleClick} id="enter"><div><img src="/static/assets/enter.png"/></div></button>
-            <footer id="disclaimer"><p><span><p onClick={()=>{setDisclaimer(true);window.scrollTo(0, 0);}}>Disclaimer</p></span> | <span><p onClick={() =>{setPP(true);window.scrollTo(0, 0);}}>Privacy Policy</p></span> | <span><p onClick={() =>{setToS(true);window.scrollTo(0, 0);}}>Terms of Service</p></span></p></footer>
-            <Modal propid={"fullscreen"} show={disclaimer}><div className="closeModal"></div><button className="closeButton" onClick={()=>setDisclaimer(false)}><img src="/static/assets/chevron.png"/></button><Disclaimer/></Modal>
+            <footer id="disclaimer"><p><span><p onClick={() =>{setPP(true);window.scrollTo(0, 0);}}>Privacy Policy</p></span> | <span><p onClick={() =>{setToS(true);window.scrollTo(0, 0);}}>Terms of Service</p></span></p></footer>
             <Modal propid={"fullscreen"} show={pp}><div className="closeModal"></div><button className="closeButton" onClick={()=>setPP(false)}><img src="/static/assets/chevron.png"/></button><PrivacyPolicy/></Modal>
             <Modal propid={"fullscreen"} show={tos}><div className="closeModal"></div><button className="closeButton" onClick={()=>setToS(false)}><img src="/static/assets/chevron.png"/></button><TermsofService/></Modal>
         </div>
