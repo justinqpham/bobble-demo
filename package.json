@@ -1,6 +1,6 @@
 {
-  "name": "boo-the-astros",
-  "version": "0.2.5",
+  "name": "demo-web-app",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "react": "^16.13.1",
@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.44",
-    "@types/react-router-dom": "^5.1.5",
+    "@types/react-router-dom": "^5.1.6",
     "css-loader": "4.2.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "4.3.0",

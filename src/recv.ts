@@ -1,8 +1,8 @@
-export default (stateCb: (state: any) => void) => {
+export default (event: string, stateCb: (state: any) => void) => {
   const create = () => {
-    const ws = new WebSocket("wss://demo.jsonws.bobblesport.com/");
+    const ws = new WebSocket(`wss://jsonws.bobblesport.com/${event}`);
 
-    console.log('receiving');
+    console.log("receiving");
 
     ws.onmessage = (ev) => {
       // console.log('Got message', ev.data);
@@ -18,4 +18,4 @@ export default (stateCb: (state: any) => void) => {
     };
   };
   create();
-}
+};
