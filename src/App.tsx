@@ -6,7 +6,7 @@ import Moods from "./moods";
 import manifest, { Manifest } from "./manifest";
 import engine from "./engine";
 import bufferedAudio from "./buffered_audio";
-import fetch from "./fetch";
+import { fetchArrayBuffer, fetchJson } from "./fetch";
 import resample from "./resample";
 // COMPONENTS
 import Phone from "./components/Phone";
@@ -88,14 +88,33 @@ class App extends React.Component<Props, State> {
 
     // Load the audio files into memory.
     // We map a manifest of URIs to a manifest of array buffers with `fetch`.
-    Manifest.Context.map(manifest, fetch)
+    fetchJson(`https://events.bobblesport.com/event/${this.state.eventId}`)
+      .then(async (result) => {
+        console.log("fetch1");
+        console.log(result);
+        if (result.audio_profile)
+          this.setState({ eventId: result.live_event_tag });
+        console.log(result.live_event_tag);
+        console.log(result.audio_profile);
+        return await fetchJson(
+          `https://audio.bobblesport.com/manifest/${result.audio_profile}`
+        );
+      })
+      .then((manifest: Manifest.Context<string>) => {
+        console.log("fetch2");
+        console.log(manifest);
+        return Manifest.Context.map(manifest, async (x) => {
+          return fetchArrayBuffer(
+            `https://audio.bobblesport.com/asset/${x}.ogg`
+          );
+        });
+      })
       .then((loaded) => {
         this.loadedManifest_ = loaded;
       })
       .catch((err) => {
         console.error("Failed to load audio!", err);
       });
-
     if (window.innerWidth > 420) {
       if (window.innerHeight < 903) {
         this.setState({ phone: "block", squish: true });
