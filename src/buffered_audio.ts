@@ -1,21 +1,20 @@
-import WorkletProtocol from './worklet_protocol';
+import WorkletProtocol from "./worklet_protocol";
 
 export interface BufferedAudio {
-
   // Initialize the buffered audio. Returns
   // a callback to begin playback (if applicable).
-  initialize(): Promise<() => void>,
+  initialize(): Promise<() => void>;
 
   // Gets the number of samples left in the internal buffer.
   // This needs to be async for worklets, as we actually have to
   // make a call into the audio thread and receive a reply.
-  remaining: () => Promise<number>,
+  remaining: () => Promise<number>;
 
   // The underlying audio node
-  node: AudioNode,
+  node: AudioNode;
 
   // Append new data to this buffered audio source
-  push: (data: Int16Array) => void,
+  push: (data: Int16Array) => void;
 }
 
 // Represents a promise that has not yet been completed
@@ -41,11 +40,11 @@ class WorkletBufferedAudio implements BufferedAudio {
     return new Promise<number>((resolve, reject) => {
       // Get a new id for this RPC call
       ++this.idIter_;
-      
+
       // We'll handle this promise in the `onMessage_` handler.
       this.outstandingRequests_[this.idIter_] = {
         resolve,
-        reject
+        reject,
       };
 
       this.node_.port.postMessage(WorkletProtocol.Host.remaining(this.idIter_));
@@ -71,20 +70,18 @@ class WorkletBufferedAudio implements BufferedAudio {
       }
       case WorkletProtocol.Worklet.Type.Log: {
         // This message type allows the worklet to use console.log for debugging purposes
-        console.log('worklet:', message.message);
+        console.log("worklet:", message.message);
       }
     }
   };
 
   async initialize() {
-    await this.context_.audioWorklet.addModule('/worklet.js');
-    this.node_ = new AudioWorkletNode(this.context_, 'buffered-processor');
+    await this.context_.audioWorklet.addModule("worklet.js");
+    this.node_ = new AudioWorkletNode(this.context_, "buffered-processor");
 
     this.node_.port.onmessage = this.onMessage_;
 
-    return () => {
-
-    };
+    return () => {};
   }
 
   get node() {
@@ -114,7 +111,8 @@ class ScriptBufferedAudio implements BufferedAudio {
     for (let i = 0; i < this.buffers_.length; ++i) {
       remaining += this.buffers_[i].length;
     }
-    if (this.currentBuffer_) remaining += this.currentBuffer_.length - this.index_;
+    if (this.currentBuffer_)
+      remaining += this.currentBuffer_.length - this.index_;
     return Promise.resolve(remaining);
   }
 
@@ -159,8 +157,8 @@ class ScriptBufferedAudio implements BufferedAudio {
 
     // The most reasonable choice for a source is a ConstantSource. Unfortunately,
     // ConstantSources are not supported in Safari. Sigh.
-    const source = this.context_.createOscillator()
-    
+    const source = this.context_.createOscillator();
+
     // Wire up our nodes
     this.node_ = this.context_.createScriptProcessor(4096, 1, 1);
     this.node_.onaudioprocess = this.onAudioProcess_;
@@ -184,6 +182,7 @@ class ScriptBufferedAudio implements BufferedAudio {
 }
 
 // If AudioWorklets are supported on this browser, use worklets. Otherwise, use the deprecated ScriptProcessorNode API.
-export default (context: AudioContext): BufferedAudio => !!context.audioWorklet
-  ? new WorkletBufferedAudio(context)
-  : new ScriptBufferedAudio(context);
+export default (context: AudioContext): BufferedAudio =>
+  !!context.audioWorklet
+    ? new WorkletBufferedAudio(context)
+    : new ScriptBufferedAudio(context);

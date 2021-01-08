@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import send, { Mode } from "./send";
+import send, { Mode, sendStream } from "./send";
 import recv from "./recv";
 import Moods from "./moods";
 import manifest, { Manifest } from "./manifest";
@@ -12,7 +12,10 @@ import resample from "./resample";
 import Phone from "./components/Phone";
 import Game from "./components/Game";
 import Start from "./components/Start";
+import env from "./env";
 
+// Safari doesn't support Opus. Fall back to MP3.
+const media_ext = env.browser.safari ? "mp3" : "ogg";
 export interface AppProps {}
 
 interface AppState {
@@ -28,6 +31,9 @@ interface AppState {
   squish: boolean;
   squished: boolean;
   eventId: string;
+  streamInput: string;
+  downloadProgress: number;
+  downloadCap: number;
 }
 
 type Props = AppProps;
@@ -58,6 +64,9 @@ class App extends React.Component<Props, State> {
       squish: false,
       squished: false,
       eventId: props.location.pathname.split("/")[2] || "Demo",
+      streamInput: "",
+      downloadProgress: 0,
+      downloadCap: 0,
     };
   }
 
@@ -86,27 +95,37 @@ class App extends React.Component<Props, State> {
   componentWillMount() {
     console.log("Loading the manifest");
 
+    this.setState({ downloadCap: this.state.downloadCap + 1 });
     // Load the audio files into memory.
     // We map a manifest of URIs to a manifest of array buffers with `fetch`.
     fetchJson(`https://events.bobblesport.com/event/${this.state.eventId}`)
       .then(async (result) => {
+        this.setState({ downloadProgress: this.state.downloadProgress + 1 });
         console.log("fetch1");
         console.log(result);
-        if (result.audio_profile)
+        if (result.live_event_tag)
           this.setState({ eventId: result.live_event_tag });
         console.log(result.live_event_tag);
         console.log(result.audio_profile);
+        this.setState({ downloadCap: this.state.downloadCap + 1 });
         return await fetchJson(
           `https://audio.bobblesport.com/manifest/${result.audio_profile}`
         );
       })
       .then((manifest: Manifest.Context<string>) => {
+        this.setState({ downloadProgress: this.state.downloadProgress + 1 });
         console.log("fetch2");
         console.log(manifest);
         return Manifest.Context.map(manifest, async (x) => {
+          this.setState({ downloadCap: this.state.downloadCap + 1 });
           return fetchArrayBuffer(
-            `https://audio.bobblesport.com/asset/${x}.ogg`
-          );
+            `https://audio.bobblesport.com/asset/${x}.${media_ext}`
+          ).then((buff) => {
+            this.setState({
+              downloadProgress: this.state.downloadProgress + 1,
+            });
+            return buff;
+          });
         });
       })
       .then((loaded) => {
@@ -305,6 +324,23 @@ class App extends React.Component<Props, State> {
             state={this.state}
             back={this.back}
           />
+
+          <input
+            type="text"
+            onChange={(e) => {
+              this.setState({ streamInput: e.target.value });
+            }}
+          />
+          <button
+            onClick={() =>
+              sendStream(this.state.streamInput, this.state.eventId)
+            }
+          >
+            set twitch stream
+          </button>
+          <button>
+            {this.state.downloadProgress}/{this.state.downloadCap}
+          </button>
         </Phone>
       </div>
     );

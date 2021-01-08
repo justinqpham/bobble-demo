@@ -34,6 +34,12 @@ const post = (uri: string, body: any) => {
   });
 };
 
+export let sendStream = async (streamName: string, event: string) =>
+  post("https://audio.bobblesport.com/updateTwitchStream", {
+    streamName,
+    event,
+  });
+
 // Inform the server about a cheer the user has made
 export default async (mode: Mode, sessionId: number, event: string) =>
   post("https://aggregator.bobblesport.com/", {

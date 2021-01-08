@@ -4,13 +4,9 @@
 extern crate rocket;
 
 use rocket::response::NamedFile;
+use rocket::response::Redirect;
 
 use std::path::{Path, PathBuf};
-
-#[get("/")]
-fn index() -> Option<NamedFile> {
-    NamedFile::open(Path::new("../dist/index.html")).ok()
-}
 
 #[get("/demo/<file..>")]
 fn demo(file: PathBuf) -> Option<NamedFile> {
@@ -19,6 +15,11 @@ fn demo(file: PathBuf) -> Option<NamedFile> {
     } else {
         NamedFile::open(Path::new("../dist/").join(file)).ok()
     }
+}
+
+#[get("/")]
+fn index() -> Redirect {
+    Redirect::to(uri!(demo: "3102f4b0-5b66-4a5c-b51e-033da2ac2b2f"))
 }
 
 #[get("/static/<file..>")]
